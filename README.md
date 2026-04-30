@@ -1,14 +1,5 @@
 <h1 align="center">Hi there, I'm Aisyah Nabila ! <img src="https://media.giphy.com/media/VbnUQpduUDREhz5HRI/giphy.gif" width="30"/></h1>
 
-<div align="center">
-  <img src="https://media.giphy.com/media/LmN8OYTf1S55e69ybO/giphy.gif" alt="Cat Coding GIF" width="200"/>
-</div>
-
-<div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=F8F8F2&center=true&vCenter=true&width=500&lines=Purr-fectly+Coding+with+Flutter;Aether+-+Your+Fashion+Shepherd;Metopen:+Cat+Breed+Classification;Mobile+Legends+Legend-(ary)+Cat!;Pawsitive+Vibes+at+UPNYK" alt="Typing SVG" />
-</div>
-
-<br/>
 
 ### 🐾 The Cat Coder's Den
 - 🎓 A **paws-itive** 6th-semester Informatics student at **UPN "Veteran" Yogyakarta**.
