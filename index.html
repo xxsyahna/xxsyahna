@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aisyah Nabila · xxsyahna</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0d1117;color:#e6edf3;font-family:'Nunito',sans-serif;min-height:100vh}
+
+/* LAYOUT */
+.page{max-width:780px;margin:0 auto;padding:20px 16px 40px}
+
+/* HERO */
+.hero{background:#161b22;border:1px solid #30363d;border-radius:16px;padding:32px 24px 24px;text-align:center;position:relative;overflow:hidden;margin-bottom:16px}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:#fff}
+@keyframes twinkle{0%{opacity:.15}100%{opacity:.95}}
+.cat-avatar{width:96px;height:96px;margin:0 auto 12px;cursor:pointer;user-select:none;font-size:72px;line-height:96px;text-align:center;transition:transform .12s;display:block}
+.cat-avatar:active{transform:scale(.82) rotate(-8deg)}
+.hero-name{font-family:'Pacifico',cursive;font-size:28px;color:#FF9ECD;margin-bottom:4px}
+.hero-handle{font-size:13px;color:#8b949e;margin-bottom:6px}
+.hero-info{font-size:12px;color:#8b949e;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.mood{font-size:15px;color:#cba6f7;font-weight:700;min-height:22px;transition:all .25s}
+.hero-badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.hbadge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* NAV TABS */
+.tabs{display:flex;background:#161b22;border:1px solid #30363d;border-radius:12px;overflow:hidden;margin-bottom:16px}
+.tab{flex:1;padding:10px 4px;font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;color:#8b949e;background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.tab.active{color:#FF9ECD;border-bottom-color:#FF9ECD;background:#FF9ECD08}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* GAME */
+.game-wrap{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.section-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8b949e;margin-bottom:12px}
+.cat-game-emoji{font-size:72px;display:block;text-align:center;cursor:pointer;user-select:none;transition:transform .1s;margin:4px 0 6px}
+.cat-game-emoji:active{transform:scale(.8) rotate(-10deg)}
+.cat-name-status{text-align:center;font-size:12px;color:#8b949e;margin-bottom:14px}
+.stat-label-row{display:flex;justify-content:space-between;font-size:12px;color:#8b949e;margin-bottom:4px}
+.bar-outer{background:#21262d;border-radius:8px;height:12px;overflow:hidden;margin-bottom:10px}
+.bar-hp{height:100%;border-radius:8px;background:linear-gradient(90deg,#FF9ECD,#ff6b9d);transition:width .4s cubic-bezier(.34,1.56,.64,1)}
+.bar-xp{height:100%;border-radius:8px;background:linear-gradient(90deg,#cba6f7,#8839ef);transition:width .4s}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.act-btn{background:#0d1117;border:1px solid #30363d;color:#e6edf3;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;padding:10px 8px;border-radius:10px;cursor:pointer;transition:all .15s;text-align:center}
+.act-btn:hover{border-color:#FF9ECD55;color:#FF9ECD;background:#FF9ECD0a;transform:translateY(-1px)}
+.act-btn:active{transform:scale(.94)}
+.act-ask{width:100%;margin-top:8px;border-color:#cba6f755;color:#cba6f7}
+.act-ask:hover{background:#cba6f70a;border-color:#cba6f7}
+.cat-bubble{min-height:24px;text-align:center;font-size:13px;font-weight:700;color:#FF9ECD;margin-top:10px;transition:all .2s}
+.float{position:absolute;font-size:15px;font-weight:800;pointer-events:none;animation:floatup .85s ease-out forwards}
+@keyframes floatup{0%{opacity:1;transform:translateY(0) scale(1)}60%{opacity:1;transform:translateY(-28px) scale(1.15)}100%{opacity:0;transform:translateY(-60px) scale(.7)}}
+.level-badge{display:inline-block;background:#cba6f711;border:1px solid #cba6f755;color:#cba6f7;font-size:11px;font-weight:700;padding:3px 11px;border-radius:10px;margin-top:8px;text-align:center}
+
+/* PROJECTS */
+.proj-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:13px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s;text-decoration:none;color:inherit}
+.proj-card:hover{border-color:#58a6ff55;transform:translateX(3px)}
+.proj-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.proj-name{font-size:14px;font-weight:700;color:#58a6ff}
+.proj-desc{font-size:12px;color:#8b949e;margin-top:2px}
+.lang-pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;margin-left:auto;flex-shrink:0}
+.quote-box{background:#0d1117;border-left:3px solid #FF9ECD;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#8b949e;font-style:italic;margin-top:4px}
+
+/* STACK */
+.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.stack-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px 8px;text-align:center;transition:all .15s;cursor:default}
+.stack-card:hover{border-color:#FF9ECD55;transform:translateY(-2px)}
+.stack-icon{font-size:30px;display:block;margin-bottom:6px}
+.stack-name{font-size:12px;font-weight:700}
+.also-title{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8b949e;margin-bottom:8px}
+.also-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.also-pill{font-size:12px;font-weight:600;padding:4px 12px;border-radius:10px;background:#21262d;border:1px solid #30363d;color:#8b949e}
+
+/* STATS */
+.contrib-title{font-size:12px;color:#8b949e;margin-bottom:8px}
+.contrib-grid{display:grid;grid-template-columns:repeat(26,1fr);gap:2px;margin-bottom:6px}
+.cbox{aspect-ratio:1;border-radius:2px;background:#21262d}
+.contrib-legend{display:flex;align-items:center;gap:4px;justify-content:flex-end;font-size:11px;color:#8b949e;margin-bottom:14px}
+.cleg{width:10px;height:10px;border-radius:2px}
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px;text-align:center}
+.stat-num{font-size:26px;font-weight:800;margin-bottom:2px}
+.stat-desc{font-size:11px;color:#8b949e}
+
+/* FOOTER */
+.footer{text-align:center;padding:20px 0 0;font-size:12px;color:#30363d}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg" id="starsBg"></div>
+    <div style="position:relative;z-index:1">
+      <span class="cat-avatar" id="heroCat" onclick="petHero(event)">😺</span>
+      <div class="level-badge" id="lvlBadge">Lv.1 · Kitten</div>
+      <div class="hero-name" style="margin-top:10px">Aisyah Nabila</div>
+      <div class="hero-handle">xxsyahna · she/her 🌸</div>
+      <div class="hero-info">
+        <span>🏫 UPN Veteran Yogyakarta</span>
+        <span>·</span>
+        <span>📍 Yogyakarta, Indonesia</span>
+        <span>·</span>
+        <span>🔗 <a href="https://linkedin.com/in/aisyah-nabila-nur-affifah" style="color:#58a6ff;text-decoration:none">LinkedIn</a></span>
+      </div>
+      <div class="mood" id="moodTxt">≽^• ⩊ •^≼  click me, nyaa~</div>
+      <div class="hero-badges">
+        <span class="hbadge" style="background:#FF9ECD22;color:#FF9ECD">🐾 117 contributions</span>
+        <span class="hbadge" style="background:#58a6ff22;color:#58a6ff">👥 7 followers</span>
+        <span class="hbadge" style="background:#3fb95022;color:#3fb950">📦 4 public repos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('game',this)">🎮 Cat Game</button>
+    <button class="tab" onclick="switchTab('proj',this)">📦 Projects</button>
+    <button class="tab" onclick="switchTab('stack',this)">🔧 Stack</button>
+    <button class="tab" onclick="switchTab('stats',this)">📊 Stats</button>
+  </div>
+
+  <!-- GAME PANEL -->
+  <div class="panel active" id="panel-game">
+    <div class="game-wrap" id="gameWrap">
+      <div class="section-label">Cat care simulator · nyaa~</div>
+      <span class="cat-game-emoji" id="gameCat" onclick="petCat(event)">😺</span>
+      <div class="cat-name-status" id="catStatus">Nabi-chan · mood: curious 👀</div>
+
+      <div class="stat-label-row"><span>❤️ Happiness</span><span id="hpNum">0 / 100</span></div>
+      <div class="bar-outer"><div class="bar-hp" id="hpBar" style="width:0%"></div></div>
+
+      <div class="stat-label-row"><span>✨ XP · Level <span id="lvlNum">1</span></span><span id="xpNum">0 / 50</span></div>
+      <div class="bar-outer"><div class="bar-xp" id="xpBar" style="width:0%"></div></div>
+
+      <div class="action-grid">
+        <button class="act-btn" onclick="doAction('pet',event)">🤚 Pet <span style="color:#8b949e;font-size:11px">(+8 HP)</span></button>
+        <button class="act-btn" onclick="doAction('feed',event)">🐟 Feed <span style="color:#8b949e;font-size:11px">(+15 HP)</span></button>
+        <button class="act-btn" onclick="doAction('play',event)">🧶 Play <span style="color:#8b949e;font-size:11px">(+12 HP)</span></button>
+        <button class="act-btn" onclick="doAction('sleep',event)">💤 Sleep <span style="color:#8b949e;font-size:11px">(+5 HP)</span></button>
+      </div>
+      <button class="act-btn act-ask" onclick="askClaude()">💬 Ask Claude what Nabi-chan thinks ↗</button>
+
+      <div class="cat-bubble" id="catBubble">Nyaa~ click to interact with me!</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS PANEL -->
+  <div class="panel" id="panel-proj">
+    <div class="section-label" style="padding:0 2px 4px">Pinned repositories</div>
+    <a href="https://github.com/xxsyahna/AetherMobileApp" target="_blank" class="proj-card">
+      <div class="proj-dot" style="background:#57c8f2"></div>
+      <div style="flex:1;min-width:0">
+        <div class="proj-name">AetherMobileApp</div>
+        <div class="proj-desc">Project Mobile SMT 6 · forked from avaiis/AetherMobileApp</div>
+      </div>
+      <span class="lang-pill" style="background:#57c8f215;color:#57c8f2">Dart</span>
+    </a>
+    <a href="https://github.com/xxsyahna/Sistem-Logistik-PRO" target="_blank" class="proj-card">
+      <div class="proj-dot" style="background:#FFD43B"></div>
+      <div style="flex:1;min-width:0">
+        <div class="proj-name">Sistem-Logistik-PRO</div>
+        <div class="proj-desc">Logistics management system 🚚</div>
+      </div>
+      <span class="lang-pill" style="background:#FFD43B15;color:#FFD43B">Python</span>
+    </a>
+    <a href="https://github.com/xxsyahna/Sistem-Pakar-Diagnosis-Malaria" target="_blank" class="proj-card">
+      <div class="proj-dot" style="background:#FFD43B"></div>
+      <div style="flex:1;min-width:0">
+        <div class="proj-name">Sistem-Pakar-Diagnosis-Malaria</div>
+        <div class="proj-desc">Aplikasi sistem pakar diagnosis malaria · tugas akhir 🩺</div>
+      </div>
+      <span class="lang-pill" style="background:#FFD43B15;color:#FFD43B">Python</span>
+    </a>
+    <a href="https://github.com/xxsyahna/web_telemedicine" target="_blank" class="proj-card">
+      <div class="proj-dot" style="background:#F7DF1E"></div>
+      <div style="flex:1;min-width:0">
+        <div class="proj-name">web_telemedicine</div>
+        <div class="proj-desc">Telemedicine web platform 💊</div>
+      </div>
+      <span class="lang-pill" style="background:#F7DF1E15;color:#F7DF1E">JavaScript</span>
+    </a>
+    <div class="quote-box">"Code is like a cat — it does exactly what it wants, not what you expect." 🐾</div>
+  </div>
+
+  <!-- STACK PANEL -->
+  <div class="panel" id="panel-stack">
+    <div class="section-label" style="padding:0 2px 6px">Tech stack</div>
+    <div class="stack-grid">
+      <div class="stack-card"><span class="stack-icon">🐍</span><div class="stack-name" style="color:#FFD43B">Python</div></div>
+      <div class="stack-card"><span class="stack-icon">🎯</span><div class="stack-name" style="color:#57c8f2">Dart</div></div>
+      <div class="stack-card"><span class="stack-icon">⚡</span><div class="stack-name" style="color:#F7DF1E">JavaScript</div></div>
+      <div class="stack-card"><span class="stack-icon">📱</span><div class="stack-name" style="color:#54C5F8">Flutter</div></div>
+      <div class="stack-card"><span class="stack-icon">🌐</span><div class="stack-name" style="color:#E34F26">HTML / CSS</div></div>
+      <div class="stack-card"><span class="stack-icon">🐙</span><div class="stack-name" style="color:#FF9ECD">Git / GitHub</div></div>
+    </div>
+    <div class="also-title">Also comfortable with</div>
+    <div class="also-wrap">
+      <span class="also-pill">VS Code</span>
+      <span class="also-pill">MySQL</span>
+      <span class="also-pill">Flask</span>
+      <span class="also-pill">Figma</span>
+      <span class="also-pill">Linux</span>
+      <span class="also-pill">Prolog</span>
+    </div>
+  </div>
+
+  <!-- STATS PANEL -->
+  <div class="panel" id="panel-stats">
+    <div class="contrib-title">117 contributions in the last year</div>
+    <div class="contrib-grid" id="contribGrid"></div>
+    <div class="contrib-legend">
+      Less
+      <div class="cleg" style="background:#21262d"></div>
+      <div class="cleg" style="background:#0e4429"></div>
+      <div class="cleg" style="background:#006d32"></div>
+      <div class="cleg" style="background:#26a641"></div>
+      <div class="cleg" style="background:#39d353"></div>
+      More
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card"><div class="stat-num" style="color:#FF9ECD">117</div><div class="stat-desc">contributions</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:#cba6f7">4</div><div class="stat-desc">public repos</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:#3fb950">7</div><div class="stat-desc">followers</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:#58a6ff">3</div><div class="stat-desc">languages</div></div>
+    </div>
+    <div style="margin-top:14px;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px;text-align:center">
+      <a href="https://github.com/xxsyahna" target="_blank" style="color:#58a6ff;font-size:13px;font-weight:700;text-decoration:none">🔗 github.com/xxsyahna</a>
+    </div>
+  </div>
+
+  <div class="footer">(=^･ω･^=) &nbsp;thanks for visiting · don't forget to leave a ⭐ &nbsp;nyaa~</div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────
+const catFaces = ['😺','😸','😸','😻','😻','🐱'];
+const levelNames = ['Kitten','Baby Cat','Playful Cat','Happy Cat','Loved Cat','Purr Machine'];
+const moods = [
+  '≽^• ⩊ •^≼  *nyaa~*',
+  '(=^･ω･^=) coding time!',
+  'ฅ^•ﻌ•^ฅ  purring loudly...',
+  '≽^◡^≼  so happy rn!',
+  'ヾ(=^･ω･^=)o  MEOW!!',
+  '(^･o･^)  headbump! ♡',
+];
+const statusText = [
+  'Nabi-chan · mood: bored... 😒',
+  'Nabi-chan · mood: curious 👀',
+  'Nabi-chan · mood: content 😌',
+  'Nabi-chan · mood: happy 😸',
+  'Nabi-chan · mood: OVERJOYED 😻',
+];
+const speaks = {
+  pet:  ['Purrr~ nyaa ♡','*nuzzles hand* mrrp!','(=^･ω･^=) thank u!','more pets pleaseee~'],
+  feed: ['MEOW!! finally food!','*happy munching* nom nom','🐟 my absolute fav!!','purring while eating~'],
+  play: ['*leaps at yarn ball* !!','chases tail aggressively hehe','*knocks things off shelf*','nyaa nyaa nyaaaaaa!!'],
+  sleep:['*closes one eye slowly*','zzz... still cute tho...','*curls into tiny round ball*','snoring softly~ 💤'],
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────
+let hp = 0, xp = 0, level = 1;
+
+// ── INIT ──────────────────────────────────────────────────────────────
+(function initStars() {
+  const c = document.getElementById('starsBg');
+  for (let i = 0; i < 35; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 1;
+    s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation:twinkle ${1.5+Math.random()*2}s ${Math.random()*2}s infinite alternate`;
+    c.appendChild(s);
+  }
+})();
+
+(function initContrib() {
+  const g = document.getElementById('contribGrid');
+  const lvls = ['#21262d','#0e4429','#006d32','#26a641','#39d353'];
+  for (let i = 0; i < 182; i++) {
+    const b = document.createElement('div');
+    b.className = 'cbox';
+    const r = Math.random();
+    b.style.background = r < .55 ? lvls[0] : r < .70 ? lvls[1] : r < .83 ? lvls[2] : r < .93 ? lvls[3] : lvls[4];
+    g.appendChild(b);
+  }
+})();
+
+// ── HELPERS ───────────────────────────────────────────────────────────
+function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function spawnFloat(text, el, color) {
+  const wrap = document.getElementById('gameWrap');
+  const er = el.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
+  const f = document.createElement('div');
+  f.className = 'float';
+  f.textContent = text;
+  f.style.cssText = `left:${er.left - wr.left + er.width/2 - 20}px;top:${er.top - wr.top - 10}px;color:${color}`;
+  wrap.appendChild(f);
+  setTimeout(() => f.remove(), 900);
+}
+
+function syncCatUI() {
+  const idx = Math.min(Math.floor(hp / 20), catFaces.length - 1);
+  document.getElementById('gameCat').textContent = catFaces[idx];
+  document.getElementById('heroCat').textContent = catFaces[idx];
+  const si = Math.min(Math.floor(hp / 25), statusText.length - 1);
+  document.getElementById('catStatus').textContent = statusText[si];
+  document.getElementById('moodTxt').textContent = moods[Math.min(Math.floor(hp / 20), moods.length - 1)];
+}
+
+function syncBars() {
+  document.getElementById('hpBar').style.width = hp + '%';
+  document.getElementById('hpNum').textContent = hp + ' / 100';
+  const xpInLevel = xp % 50;
+  document.getElementById('xpBar').style.width = (xpInLevel * 2) + '%';
+  document.getElementById('xpNum').textContent = xpInLevel + ' / 50';
+}
+
+function syncLevel() {
+  const newLv = Math.floor(xp / 50) + 1;
+  if (newLv !== level) {
+    level = newLv;
+    document.getElementById('catBubble').textContent = '🎉 Level up! Now ' + (levelNames[Math.min(level - 1, levelNames.length - 1)]) + '!';
+  }
+  document.getElementById('lvlNum').textContent = level;
+  document.getElementById('lvlBadge').textContent = 'Lv.' + level + ' · ' + levelNames[Math.min(level - 1, levelNames.length - 1)];
+}
+
+// ── ACTIONS ───────────────────────────────────────────────────────────
+const actions = {
+  pet:   { hp: 8,  xp: 3, color: '#FF9ECD', icon: '+8 ❤️' },
+  feed:  { hp: 15, xp: 5, color: '#3fb950', icon: '+15 🐟' },
+  play:  { hp: 12, xp: 8, color: '#cba6f7', icon: '+12 🧶' },
+  sleep: { hp: 5,  xp: 2, color: '#58a6ff', icon: '+5 💤'  },
+};
+
+function doAction(type, e) {
+  const a = actions[type];
+  hp = Math.min(hp + a.hp, 100);
+  xp += a.xp;
+  syncBars();
+  syncCatUI();
+  syncLevel();
+  document.getElementById('catBubble').textContent = rand(speaks[type]);
+  spawnFloat(a.icon, e.currentTarget, a.color);
+}
+
+function petCat(e)   { doAction('pet', e); }
+function petHero(e)  {
+  hp = Math.min(hp + 8, 100); xp += 3;
+  syncBars(); syncCatUI(); syncLevel();
+  document.getElementById('catBubble').textContent = rand(speaks.pet);
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+// ── ASK CLAUDE ────────────────────────────────────────────────────────
+function askClaude() {
+  const lv = levelNames[Math.min(level - 1, levelNames.length - 1)];
+  const msg = 'Kamu adalah kucing Aisyah Nabila bernama Nabi-chan. HP happiness kamu sekarang ' + hp + '/100 dan kamu level ' + level + ' (' + lv + '). Bereaksi dengan sangat lucu dalam bahasa kucing campur bahasa Indonesia! Sertakan meow dan emoji paw 🐾';
+  if (typeof sendPrompt === 'function') {
+    sendPrompt(msg);
+  } else {
+    alert('(=^･ω･^=) Paste pesan ini ke Claude:\n\n' + msg);
+  }
+}
+</script>
+</body>
+</html>
