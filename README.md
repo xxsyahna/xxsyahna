@@ -4,12 +4,6 @@
 
 <br/>
 
-```
-  ／l、
-（ﾟ､ ｡ ７        // building things, one paw at a time~
-  l  ~ヽ
-  じしf_,)ノ
-```
 
 ![](https://img.shields.io/badge/UPN%20Veteran%20Yogyakarta-FF9ECD?style=flat-square&logoColor=white)
 ![](https://img.shields.io/badge/Yogyakarta%2C%20Indonesia-58A6FF?style=flat-square&logoColor=white)
